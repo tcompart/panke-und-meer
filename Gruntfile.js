@@ -7,7 +7,7 @@ module.exports = function(grunt) {
       },
       javascript: {
         files: {
-          'js/<%= pkg.name %>.min.js': ['js/*.js', '!js/*.min.js']
+          'dist/js/<%= pkg.name %>.min.js': ['js/*.js', '!js/*.min.js']
         }
       }
     },
@@ -18,13 +18,12 @@ module.exports = function(grunt) {
           banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> - version "<%= pkg.version %>" */\n'
         },
         files: {
-          'css/<%= pkg.name %>.min.css': ['css/normalize.css', 'css/main.css']
+          'dist/styles/<%= pkg.name %>.min.css': ['css/normalize.css', 'css/main.css']
         }
       }
     },
     clean: {
-      css: [ 'css/*<%= pkg.name %>*' ],
-      js: [ 'js/<%= pkg.name %>*' ]
+      dist: [ './dist' ]
     },
     assets_versioning: {
       options: {
@@ -32,8 +31,38 @@ module.exports = function(grunt) {
         hashLength: 6
       },
       files: {
-        'js/<%= pkg.name %>.js': ['js/*.min.js']
+        'dist/<%= pkg.name %>.min.js': ['dist/*.min.js']
       }
+    },
+    copy: {
+      main: {
+        files: [
+          {src: ['js/vendor/*'], dest: 'dist/', filter: 'isFile'},
+          {src: ['./*.html'], dest: 'dist/'},
+          {src: ['*.png','favicon.ico', 'robots.txt'], dest: 'dist/'}
+        ]
+      }
+    },
+    watch: {
+      grunt: {
+        tasks: ['build' ], 
+        files: ['js/**','css/**', 'index.html'],
+        options: {
+          livereload: true
+        }
+      }
+    },
+    connect: {
+      server: {
+        options: {
+          keepalive: true,
+          port: 8080,
+          base: './dist'
+        }
+      }
+    },
+    concurrent: {
+      server: ['connect', 'watch']
     }
   });
 
@@ -41,7 +70,13 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-assets-versioning');
+  grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-contrib-connect');
+  grunt.loadNpmTasks('grunt-concurrent');
 
-  grunt.registerTask('default', ['clean','uglify','cssmin','assets_versioning']);
+  grunt.registerTask('serve-files', ['concurrent']);
+  grunt.registerTask('build', ['uglify','cssmin','assets_versioning','copy']);
+  grunt.registerTask('default', ['clean','build', 'serve-files']);
 
 };

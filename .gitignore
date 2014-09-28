@@ -2,3 +2,5 @@
 npm-debug.log
 panke&meer.iml
 .idea
+node_modules
+dist
