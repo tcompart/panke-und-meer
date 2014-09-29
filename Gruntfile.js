@@ -7,7 +7,7 @@ module.exports = function(grunt) {
       },
       javascript: {
         files: {
-          'dist/js/<%= pkg.name %>.min.js': ['js/*.js', '!js/*.min.js']
+          'dist/js/<%= pkg.name %>.min.js': ['js/map.js', 'js/main.js']
         }
       }
     },
@@ -18,7 +18,7 @@ module.exports = function(grunt) {
           banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> - version "<%= pkg.version %>" */\n'
         },
         files: {
-          'dist/styles/<%= pkg.name %>.min.css': ['css/normalize.css', 'css/main.css']
+          'dist/styles/<%= pkg.name %>.min.css': ['css/normalize.css', 'css/map.css', 'css/main.css']
         }
       }
     },
@@ -39,7 +39,8 @@ module.exports = function(grunt) {
         files: [
           {src: ['js/vendor/*'], dest: 'dist/', filter: 'isFile'},
           {src: ['./*.html'], dest: 'dist/'},
-          {src: ['*.png','favicon.ico', 'robots.txt'], dest: 'dist/'}
+          {src: ['*.png','favicon.ico', 'robots.txt'], dest: 'dist/'},
+          {src: ['img/IMG_6354.jpeg'], dest: 'dist/img/picture.jpeg'}
         ]
       }
     },
