@@ -2,5 +2,6 @@
 npm-debug.log
 panke&meer.iml
 .idea
+.sass-cache
 node_modules
 dist
