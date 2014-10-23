@@ -1,0 +1,15 @@
+// Use Compass
+@import "compass";
+
+// Set variables and reusable mixins
+@import "partials/variables";
+
+// Reset using Normalize
+@import "partials/normalize";
+
+
+@import "partials/navigation";
+@import "partials/basic_structure";
+
+// If IE support is needed
+@import "partials/ie";

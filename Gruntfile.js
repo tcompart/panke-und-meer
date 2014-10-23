@@ -7,7 +7,18 @@ module.exports = function(grunt) {
       },
       javascript: {
         files: {
-          'dist/js/<%= pkg.name %>.min.js': ['js/map.js', 'js/main.js']
+          'dist/js/<%= pkg.name %>.min.js': ['js/main.js' //'js/map.js',
+            ]
+        }
+      }
+    },
+    compass: {
+      dist: {
+        options: {
+          sassDir: 'css/sass',
+          environment: 'production',
+          cssDir: 'css',
+          outputStyle: 'compressed'
         }
       }
     },
@@ -18,7 +29,7 @@ module.exports = function(grunt) {
           banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> - version "<%= pkg.version %>" */\n'
         },
         files: {
-          'dist/styles/<%= pkg.name %>.min.css': ['css/normalize.css', 'css/map.css', 'css/main.css']
+          'dist/styles/<%= pkg.name %>.min.css': ['css/*.css']
         }
       }
     },
@@ -38,9 +49,10 @@ module.exports = function(grunt) {
       main: {
         files: [
           {src: ['js/vendor/*'], dest: 'dist/', filter: 'isFile'},
-          {src: ['./*.html'], dest: 'dist/'},
+          {src: ['./templates/*.html'], dest: 'dist/'},
+          {src: ['./index.html'], dest: 'dist/'},
           {src: ['*.png','favicon.ico', 'robots.txt'], dest: 'dist/'},
-          {src: ['img/IMG_6354.jpeg'], dest: 'dist/img/picture.jpeg'}
+          {src: ['img/*.jpg'], dest: 'dist/', filter: 'isFile'}
         ]
       }
     },
@@ -75,9 +87,10 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-concurrent');
+  grunt.loadNpmTasks('grunt-contrib-compass');
 
   grunt.registerTask('serve-files', ['concurrent']);
-  grunt.registerTask('build', ['uglify','cssmin','assets_versioning','copy']);
+  grunt.registerTask('build', ['uglify','compass','cssmin','assets_versioning','copy']);
   grunt.registerTask('default', ['clean','build', 'serve-files']);
 
 };
