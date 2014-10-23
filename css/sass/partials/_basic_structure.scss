@@ -37,6 +37,11 @@ img {
   color: $map_background_color;
 }
 
+a {
+  color: $map_background_color;
+  text-decoration: underline;
+}
+
 .btn {
   color: $text_special_color;
   border-color: $text_border_color;
