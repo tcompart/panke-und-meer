@@ -1,8 +1,12 @@
 @charset "UTF-8";
 @import "variables";
 
-.main {
-  padding: 30px 0;
+html, body { 
+  height:100%; 
+}
+
+.main-container {
+  padding: 30px 0 20px;
 }
 
 .main article h1 {
@@ -45,4 +49,8 @@ a {
 .btn {
   color: $text_special_color;
   border-color: $text_border_color;
+}
+
+a.btn {
+  text-decoration: none;
 }

@@ -1,6 +1,7 @@
 @charset "UTF-8";
 
-aside #map_canvas {
-  height: 200px;
+#map_canvas {
+  height: 300px;
   background-color: $map_background_color;
+  padding: 20px;
 }

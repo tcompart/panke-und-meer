@@ -7,8 +7,7 @@ module.exports = function(grunt) {
       },
       javascript: {
         files: {
-          'dist/js/<%= pkg.name %>.min.js': ['js/main.js' //'js/map.js',
-            ]
+          'dist/js/<%= pkg.name %>.min.js': ['js/main.js', 'js/map.js']
         }
       }
     },
@@ -34,7 +33,7 @@ module.exports = function(grunt) {
       }
     },
     clean: {
-      dist: [ './dist' ]
+      dist: [ './dist', './css/panke&meer.css' ]
     },
     assets_versioning: {
       options: {
@@ -50,7 +49,7 @@ module.exports = function(grunt) {
         files: [
           {src: ['js/vendor/*'], dest: 'dist/', filter: 'isFile'},
           {src: ['./templates/*.html'], dest: 'dist/'},
-          {src: ['./index.html'], dest: 'dist/'},
+          {expand: true, src: ['./html/*.html'], dest: 'dist/', flatten: true},
           {src: ['*.png','favicon.ico', 'robots.txt'], dest: 'dist/'},
           {src: ['img/*.jpg'], dest: 'dist/', filter: 'isFile'}
         ]
@@ -59,7 +58,7 @@ module.exports = function(grunt) {
     watch: {
       grunt: {
         tasks: ['build' ], 
-        files: ['js/**','css/**', 'index.html'],
+        files: ['js/**','css/**', 'html/**'],
         options: {
           livereload: true
         }
