@@ -55,6 +55,11 @@ module.exports = function(grunt) {
         ]
       }
     },
+    sitemap: {
+      dist: {
+        siteRoot: './dist/'
+      }
+    },
     watch: {
       grunt: {
         tasks: ['build' ], 
@@ -87,9 +92,10 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-concurrent');
   grunt.loadNpmTasks('grunt-contrib-compass');
+  grunt.loadNpmTasks('grunt-sitemap');
 
   grunt.registerTask('serve-files', ['concurrent']);
-  grunt.registerTask('build', ['uglify','compass','cssmin','assets_versioning','copy']);
+  grunt.registerTask('build', ['uglify','compass','cssmin','assets_versioning','copy','sitemap']);
   grunt.registerTask('default', ['clean','build', 'serve-files']);
 
 };
