@@ -14,7 +14,9 @@ function initialize() {
     map: map,
     title: 'Panke & Meer'
   });
-
 }
-google.maps.event.addDomListener(window, 'load', initialize);
 
+var google = google || null;
+if (google !== null) {
+  google.maps.event.addDomListener(window, 'load', initialize);
+}
