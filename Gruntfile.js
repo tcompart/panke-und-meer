@@ -48,8 +48,7 @@ module.exports = function(grunt) {
       main: {
         files: [
           {src: ['js/vendor/**'], dest: 'dist/', filter: 'isFile'},
-          {src: ['./templates/*.html'], dest: 'dist/'},
-          {expand: true, src: ['./html/*.html'], dest: 'dist/', flatten: true},
+          {expand: true, src: ['./html/*.html', './html/.htaccess'], dot: true, dest: 'dist/', flatten: true},
           {src: ['*.png','favicon.ico', 'robots.txt'], dest: 'dist/'},
           {src: ['img/**'], dest: 'dist/', filter: 'isFile'}
         ]
