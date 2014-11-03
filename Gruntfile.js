@@ -50,7 +50,7 @@ module.exports = function(grunt) {
           {src: ['js/vendor/**'], dest: 'dist/', filter: 'isFile'},
           {expand: true, src: ['./html/*.html', './html/.htaccess'], dot: true, dest: 'dist/', flatten: true},
           {src: ['*.png','favicon.ico', 'robots.txt'], dest: 'dist/'},
-          {src: ['img/**'], dest: 'dist/', filter: 'isFile'}
+          {src: ['img/bistro/**', 'img/cafebar/**'], dest: 'dist/', filter: 'isFile'}
         ]
       }
     },
@@ -59,10 +59,39 @@ module.exports = function(grunt) {
         siteRoot: './dist/'
       }
     },
+    responsive_images: {
+      dist: {
+        options: {
+          engine: 'im',
+          sizes: [{
+            name: 'xs',
+            quality: 100,
+            width: 360
+          },{
+            name: 'sm',
+            quality: 100,
+            width: 768
+          },{
+            name: 'md',
+            quality: 100,
+            width: 992
+          },{
+            name: 'lg',
+            quality: 100,
+            width: 1200
+          }]
+        },
+        files: [{
+          expand: true,
+          src: ['./img/**.{jpg,gif,png}'],
+          dest: './dist/'
+        }]
+      }
+    },
     watch: {
       grunt: {
         tasks: ['build' ], 
-        files: ['js/**','css/**', 'html/**'],
+        files: ['js/**','css/**', 'html/**', 'img/**'],
         options: {
           livereload: true
         }
@@ -92,9 +121,10 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-concurrent');
   grunt.loadNpmTasks('grunt-contrib-compass');
   grunt.loadNpmTasks('grunt-sitemap');
+  grunt.loadNpmTasks('grunt-responsive-images');
 
   grunt.registerTask('serve-files', ['concurrent']);
-  grunt.registerTask('build', ['uglify','compass','cssmin','assets_versioning','copy','sitemap']);
+  grunt.registerTask('build', ['uglify','compass','cssmin','assets_versioning','copy','sitemap', 'responsive_images']);
   grunt.registerTask('default', ['clean','build', 'serve-files']);
 
 };

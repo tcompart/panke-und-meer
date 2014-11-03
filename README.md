@@ -15,8 +15,12 @@ one command:
 
 What has to be done?
 
+# Installing the required nodejs and grunt tools
 * `curl http://npmjs.org/install.sh | sh` e.g. [this install guide](http://howtonode.org/introduction-to-npm)
 * `npm install -g grunt-cli` (with sudo most likely)
 * `npm install` in project directory
+
+# Instal Imagemagick on your system to get responsive_images target running
+* see [grunt-responsive-images](https://www.npmjs.org/package/grunt-responsive-images) for more details
 
 Then the files will be served on `localhost:8080` 
