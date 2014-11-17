@@ -49,7 +49,8 @@ module.exports = function(grunt) {
         files: [
           {src: ['js/vendor/**'], dest: 'dist/', filter: 'isFile'},
           {expand: true, src: ['./html/*.html', './html/.htaccess'], dot: true, dest: 'dist/', flatten: true},
-          {src: ['*.png','favicon.ico', 'robots.txt'], dest: 'dist/'}
+          {src: ['*.png','favicon.ico', 'robots.txt'], dest: 'dist/'},
+          {src: ['img/*.png'], dest: 'dist/'}
         ]
       }
     },
@@ -70,7 +71,7 @@ module.exports = function(grunt) {
         },
         files: [{
           expand: true,
-          src: ['./img/**/*.{jpg,gif,png}'],
+          src: ['./img/**/*.{jpg,gif}'],
           dest: './dist/'
         }]
       }
