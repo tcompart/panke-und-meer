@@ -44,11 +44,26 @@ module.exports = function(grunt) {
         'dist/<%= pkg.name %>.min.js': ['dist/*.min.js']
       }
     },
+    htmlbuild: {
+      dist: {
+        src: 'html/*.html',
+        dest: 'dist/',
+        options: {
+          beautify: true,
+          sections: {
+            layout: {
+              header: 'html/partials/header.partials.html',
+              footer: 'html/partials/footer.partials.html'
+            }
+          }
+        }
+      }
+    },
     copy: {
       main: {
         files: [
           {src: ['js/vendor/**'], dest: 'dist/', filter: 'isFile'},
-          {expand: true, src: ['./html/*.html', './html/.htaccess'], dot: true, dest: 'dist/', flatten: true},
+          {expand: true, src: ['./html/.htaccess'], dot: true, dest: 'dist/', flatten: true},
           {src: ['*.png','favicon.ico', 'robots.txt'], dest: 'dist/'},
           {src: ['img/*.png'], dest: 'dist/'}
         ]
@@ -110,9 +125,10 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-compass');
   grunt.loadNpmTasks('grunt-sitemap');
   grunt.loadNpmTasks('grunt-responsive-images');
+  grunt.loadNpmTasks('grunt-html-build');
 
   grunt.registerTask('serve-files', ['concurrent']);
-  grunt.registerTask('build', ['uglify','compass','cssmin','assets_versioning','copy','sitemap', 'responsive_images']);
+  grunt.registerTask('build', ['uglify','compass','cssmin','assets_versioning','copy','htmlbuild:dist','sitemap', 'responsive_images']);
   grunt.registerTask('default', ['clean','build', 'serve-files']);
 
 };
