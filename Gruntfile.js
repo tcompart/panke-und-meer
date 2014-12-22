@@ -53,7 +53,8 @@ module.exports = function(grunt) {
           sections: {
             layout: {
               header: 'html/partials/header.partials.html',
-              footer: 'html/partials/footer.partials.html'
+              footer: 'html/partials/footer.partials.html',
+              buttonbar: 'html/partials/buttonbar.partials.html'
             }
           }
         }
